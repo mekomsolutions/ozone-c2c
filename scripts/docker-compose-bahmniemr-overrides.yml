@@ -1,0 +1,4 @@
+services:
+  openmrs:
+    volumes:
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
