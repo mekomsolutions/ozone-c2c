@@ -52,6 +52,53 @@
             </configuration>
           </execution>
           <execution>
+            <!-- Exclude files from Ozone -->
+            <id>Exclude unneeded Ozone files</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
+              <overwrite>true</overwrite>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/ozone</directory>
+                  <excludes>
+                    <exclude>distro/configs/orthanc/</exclude>
+                    <exclude>distro/configs/openmrs/</exclude>
+                    <exclude>distro/configs/erpnext/</exclude>
+
+                    <exclude>distro/configs/bahmniemr/frontend/apps/</exclude>
+                    <exclude>distro/configs/bahmniemr/frontend/i18n/</exclude>
+                    <exclude>distro/configs/bahmniemr/frontend/obscalculator/</exclude>
+
+<!--                    <exclude>distro/configs/bahmniemr/initializer/addresshierarchy/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/appointmentservicedefinitions/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/appointmentspecialities/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/appointmentspecialities/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/bahmniforms/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/conceptclasses/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/concepts/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/conceptsets/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/conceptsources/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/drugs/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/locations/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/ocl/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/ordertypes/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/personattributetypes/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/programs/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/programworkflows/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/programworkflowstates/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/relationshiptypes/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/roles/</exclude>-->
+<!--                    <exclude>distro/configs/bahmniemr/initializer/visittypes/</exclude>-->
+                  </excludes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
             <!-- Override with local configuration files-->
             <id>Copy local configs resources</id>
             <phase>process-resources</phase>
