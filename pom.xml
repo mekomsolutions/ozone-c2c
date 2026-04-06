@@ -72,6 +72,51 @@
         </repository>
     </repositories>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>openmrs-repo</id>
+            <name>OpenMRS Nexus Repository</name>
+            <url>https://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>openmrs-snapshots</id>
+            <name>OpenMRS Public Repository</name>
+            <url>https://mavenrepo.openmrs.org/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>mks-nexus-public</id>
+            <url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>mks-nexus-snapshots</id>
+            <url>https://nexus.mekomsolutions.net/repository/maven-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <name>Mekom Solutions Nexus repo for releases</name>
+            <id>mks-nexus-public-releases</id>
+            <url>https://nexus.mekomsolutions.net/repository/maven-private-releases</url>
+        </repository>
+        <snapshotRepository>
+            <name>Mekom Solutions Nexus repo for snapshots</name>
+            <id>mks-nexus-public-snapshots</id>
+            <url>https://nexus.mekomsolutions.net/repository/maven-private-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
@@ -435,28 +480,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <!-- Override with local configuration files-->
-                        <id>Copy local configs resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}/${project.artifactId}-${project.version}/distro/configs
-                            </outputDirectory>
-                            <overwrite>true</overwrite>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/configs</directory>
-                                    <excludes>
-                                        <exclude>.gitkeep</exclude>
-                                    </excludes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <!-- Copy over the Docker Compose overrides file -->
                         <id>Copy Docker Compose overrides</id>
                         <phase>process-resources</phase>
@@ -529,13 +552,6 @@
     <profiles>
         <profile>
             <id>validator</id>
-            <activation>
-                <jdk>1.8</jdk>
-                <property>
-                    <name>env.CI</name>
-                    <value>true</value>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <!-- hooking the OpenMRS config validation to the integration-test phase -->
