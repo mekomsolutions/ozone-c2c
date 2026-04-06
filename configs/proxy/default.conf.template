@@ -1,0 +1,324 @@
+# This config is used to increase the maximum body size for file uploads
+client_max_body_size ${PROXY_CLIENT_MAX_BODY_SIZE};
+
+map $request_uri $csp_header {
+  default "default-src 'self' 'unsafe-inline' 'unsafe-eval'; base-uri 'self'; font-src 'self'; img-src 'self' data:; frame-ancestors 'self' ${FRAME_ANCESTORS};";
+  "~^/openmrs/(?:admin|dictionary|module|patientDashboard.form)/" "default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; base-uri 'self'; font-src 'self'; frame-ancestors 'self';";
+  "~^/openmrs/owa" "default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; base-uri 'self'; font-src 'self' data:; img-src 'self' data:; frame-ancestors 'self';";
+}
+
+map $http_x_forwarded_proto $forwarded_proto {
+  "~.*" $http_x_forwarded_proto;
+  default    $scheme;
+}
+
+map $http_x_real_ip $forwarded_ip {
+  "~.*"  $http_x_real_ip;
+  default $remote_addr;
+}
+
+map $forwarded_proto $var_proxy_cookie_flags {
+  https   "JSESSIONID secure samesite=strict";
+  default "off";
+}
+
+map $GITPOD_ENV $senaite_rewrite {
+    "true" /VirtualHostBase/https/$host/senaite/VirtualHostRoot/;
+    default /VirtualHostBase/http/$host/senaite/VirtualHostRoot/;
+}
+
+map $GITPOD_ENV $forwarded_proto {
+    "true"   https;
+    default  $scheme;
+}
+
+upstream backend {
+  server openmrs:8080 max_fails=0;
+}
+
+server {
+  listen       80;
+
+  add_header X-XSS-Protection "1; mode=block";
+  add_header Content-Security-Policy $csp_header;
+  add_header X-Content-Type-Options nosniff;
+
+  proxy_set_header      HOST $host;
+  proxy_set_header      X-Forwarded-Proto $forwarded_proto;
+  proxy_set_header      X-Real-IP $forwarded_ip;
+  proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+  # if serving this via HTTPS, the following is recommended
+  # proxy_cookie_flags      $var_proxy_cookie_flags;
+  proxy_http_version    1.1;
+
+  gzip on;
+  gzip_vary on;
+  # 1 KiB
+  gzip_min_length 1024;
+  gzip_proxied any;
+  gzip_http_version 1.0;
+  gzip_types  font/eot
+              font/otf
+              font/ttf
+              image/svg+xml
+              text/css
+              text/javascript
+              text/plain
+              text/xml
+              application/atom+xml
+              application/geo+json
+              application/importmap+json
+              application/javascript
+              application/x-javascript
+              application/json
+              application/ld+json
+              application/fhir+json
+              application/fhir+xml
+              application/manifest+json
+              application/rdf+xml
+              application/rss+xml
+              application/xhtml+xml
+              application/xml;
+
+  # all redirects are relative to the gateway
+  absolute_redirect off;
+
+  location = /openmrs/spa {
+    return 301 /openmrs/spa/;
+  }
+
+  location /openmrs {
+    proxy_pass http://backend;
+    set $reporting_session "";
+    if ($http_cookie ~* "JSESSIONID=([^;]+)") {
+        set $reporting_session $1;
+    }
+    if ($reporting_session) {
+        add_header Set-Cookie "reporting_session=$reporting_session; Path=/; Max-Age=86400; HttpOnly";
+    }
+  }
+
+  location = / {
+    return 301 /openmrs/spa/;
+  }
+
+  # Uploaded Files
+  location = /uploaded-files {
+    return 301 /uploaded-files/;
+  }
+
+  location /uploaded-files/ {
+    set $patient_documents patient-documents:80;
+    proxy_pass http://$patient_documents;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Patient Documents
+  location = /document_images {
+    return 301 /document_images/;
+  }
+
+  location /document_images/ {
+    set $patient_documents patient-documents:80;
+    proxy_pass http://$patient_documents;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Lab Results
+  location = /uploaded_results {
+    return 301 /uploaded_results/;
+  }
+
+  location /uploaded_results/ {
+    set $patient_documents patient-documents:80;
+    proxy_pass http://$patient_documents;
+    proxy_redirect http://$host/ /;
+  }
+
+  # OpenMRS Authentication
+  location = /openmrs/auth {
+    return 301 /openmrs/auth/;
+  }
+
+  location /openmrs/auth/ {
+    set $patient_documents patient-documents:80;
+    proxy_pass http://$patient_documents;
+    proxy_redirect http://$host/ /;
+  }
+
+  # appointments
+  location = /appointments {
+    return 301 /appointments/;
+  }
+
+  location /appointments/ {
+    set $appointments appointments:80;
+    proxy_pass http://$appointments;
+    proxy_redirect http://$host/ /;
+  }
+
+  # ipd
+  location = /ipd {
+    return 301 /ipd/;
+  }
+
+  location /ipd/ {
+    set $ipd ipd:80;
+    proxy_pass http://$ipd;
+    proxy_redirect http://$host/ /;
+  }
+
+  # bahmnireports
+  location = /bahmnireports {
+    return 301 /bahmnireports/;
+  }
+
+  location /bahmnireports/ {
+    set $bahmnireports reports:8051;
+    proxy_pass http://$bahmnireports;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Bahmni Web
+  location = /bahmni {
+    return 301 /bahmni/;
+  }
+
+  location /bahmni/ {
+    set $bahmni_web bahmni-web:8091;
+    add_header X-Robots-Tag "noindex, nofollow";
+    proxy_pass http://$bahmni_web;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Bahmni Person Management
+  location = /person-management {
+    return 301 /person-management/;
+  }
+  
+  location /person-management/ {
+    set $bahmni_web bahmni-web:8091;
+    proxy_pass http://$bahmni_web;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Bahmni Config OpenMRS Apps
+  location = /bahmni_config/openmrs/apps {
+    return 301 /bahmni_config/openmrs/apps/;
+  }
+
+  location /bahmni_config/openmrs/apps/ {
+    set $bahmni_web bahmni-web:8091;
+    proxy_pass http://$bahmni_web;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Bahmni Config OpenMRS I18n
+  location = /bahmni_config/openmrs/i18n {
+    return 301 /bahmni_config/openmrs/i18n/;
+  }
+
+  location /bahmni_config/openmrs/i18n/ {
+    set $bahmni_web bahmni-web:8091;
+    proxy_pass http://$bahmni_web;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Implementer Interface
+  location = /implementer-interface {
+    return 301 /implementer-interface/;
+  }
+
+  location /implementer-interface/ {
+    set $implementer_interface implementer-interface:80;
+    proxy_pass http://$implementer_interface;
+    proxy_redirect http://$host/ /;
+  }
+
+  # Bahmni's CGI script location
+  location /cgi-bin/ {
+    root /usr/local/bahmni;
+  }
+}
+
+server {
+    listen 8069;
+    server_name localhost;
+
+    # Increase proxy buffer size
+    proxy_buffers 16 64k;
+    proxy_buffer_size 128k;
+    # Force timeouts if the openmrs:8080 dies
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
+    # Enable data compression
+    gzip on;
+    gzip_min_length 1100;
+    gzip_buffers 4 32k;
+    gzip_types text/plain text/xml text/css text/less application/x-javascript application/xml application/json application/javascript;
+    gzip_vary on;
+
+    # Proxy header and settings
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $forwarded_proto;
+
+
+
+    # Cache static data
+    location ~* /web/static/ {
+        proxy_cache_valid 200 60m;
+        proxy_buffering on;
+        expires 864000;
+        set $odoo odoo:8069;
+        proxy_pass http://$odoo;
+    }
+
+    location / {
+
+        set $odoo odoo:8069;
+        proxy_pass http://$odoo;
+        # The following makes the timeout broader
+        proxy_read_timeout 30000;
+        proxy_redirect off;
+    }
+
+    location /longpolling {
+        set $odoo odoo:8072;
+        proxy_pass http://$odoo;
+    }
+}
+
+server {
+    listen 8081;
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        set $senaite senaite:8080;
+        proxy_pass http://$senaite;
+        rewrite ^(.*)$ $senaite_rewrite/$1 break;
+    }
+}
+
+server {
+    listen 8083;
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        set $fhirOdoo fhir-odoo:8080;
+        proxy_pass http://$fhirOdoo;
+    }
+}
+
+server {
+    listen 8084;
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $keycloak keycloak:8080;
+        proxy_pass http://$keycloak;
+    }
+}
