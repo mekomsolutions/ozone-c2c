@@ -2,3 +2,7 @@ services:
   openmrs:
     volumes:
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
+
+  eip-odoo-openmrs:
+    environment:
+      - EIP_DRUG_ORDER_TYPE_UUID=16bb6bcf-2e81-4ba5-8583-ff4913201a72
