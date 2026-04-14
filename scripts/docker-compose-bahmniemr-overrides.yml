@@ -2,6 +2,8 @@ services:
   openmrs:
     volumes:
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
+      - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
+#      - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
 
   eip-odoo-openmrs:
     environment:
