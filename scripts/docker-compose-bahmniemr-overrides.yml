@@ -2,3 +2,9 @@ services:
   openmrs:
     volumes:
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
+      - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
+#      - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
+
+  eip-odoo-openmrs:
+    environment:
+      - EIP_DRUG_ORDER_TYPE_UUID=16bb6bcf-2e81-4ba5-8583-ff4913201a72

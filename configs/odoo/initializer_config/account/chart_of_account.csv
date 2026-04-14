@@ -1,0 +1,3 @@
+id,name,account_type,code,reconcile
+init.1_conf_a_sale,Product Sales,income,200000,
+init.1_conf_cog,Cost of Revenue,expense_direct_cost,210000,
