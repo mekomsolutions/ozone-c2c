@@ -513,13 +513,16 @@
                                         <exclude>distro/configs/bahmniemr/initializer/appointmentservicedefinitions/
                                         </exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/appointmentspecialities/</exclude>
-                                        <exclude>distro/configs/bahmniemr/initializer/appointmentspecialities/</exclude>
+                                        <exclude>distro/configs/bahmniemr/initializer/attributetypes/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/bahmniforms/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/conceptclasses/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/concepts/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/conceptsets/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/conceptsources/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/drugs/</exclude>
+                                        <exclude>distro/configs/bahmniemr/initializer/encountertypes/</exclude>
+                                        <exclude>distro/configs/bahmniemr/initializer/idgen/</exclude>
+                                        <exclude>distro/configs/bahmniemr/initializer/liquibase/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/locations/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/ocl/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/ordertypes/</exclude>
@@ -530,6 +533,9 @@
                                         <exclude>distro/configs/bahmniemr/initializer/relationshiptypes/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/roles/</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/visittypes/</exclude>
+
+                                        <exclude>distro/configs/bahmniemr/initializer/globalproperties/gp_diagnosis.xml</exclude>
+                                        <exclude>distro/configs/bahmniemr/initializer/globalproperties/gp_registration.xml</exclude>
                                     </excludes>
                                 </resource>
                             </resources>

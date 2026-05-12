@@ -1,9 +1,12 @@
 services:
   openmrs:
+    environment:
+      OMRS_CREATE_TABLES: "false"
+      OMRS_AUTO_UPDATE_DATABASE: "true"
     volumes:
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
-#      - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
+      - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
 
   eip-odoo-openmrs:
     environment:
