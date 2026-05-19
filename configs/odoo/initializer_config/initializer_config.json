@@ -51,11 +51,6 @@
             "field_rules": {}
         },
         {
-            "model_name": "stock.quant",
-            "folder": "stock_quant",
-            "field_rules": {}
-        },
-        {
             "model_name": "res.users",
             "folder": "user",
             "field_rules": {}

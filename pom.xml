@@ -536,6 +536,8 @@
 
                                         <exclude>distro/configs/bahmniemr/initializer/globalproperties/gp_diagnosis.xml</exclude>
                                         <exclude>distro/configs/bahmniemr/initializer/globalproperties/gp_registration.xml</exclude>
+
+                                        <exclude>distro/configs/odoo/initializer_config/company/</exclude>
                                     </excludes>
                                 </resource>
                             </resources>

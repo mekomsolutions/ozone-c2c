@@ -1,9 +1,0 @@
-"id","name","location_id/id","company_id/id","usage",active
-"init.stock_location_h2","Stock","stock.stock_location_locations","init.12b972a9-abcb-436f-a945-0578e67b4569","internal",True
-"init.stock_location_h3","Stock","stock.stock_location_locations","init.a242af5c-4a3b-43ca-a6ba-3cd2b7774d8a","internal",True
-"init.stock_location_h4","Stock","stock.stock_location_locations","init.7fef5d23-2a82-4f30-a596-1da37e472d23","internal",True
-"init.stock_location_h5","Stock","stock.stock_location_locations","init.4d7ef681-57ce-4cf1-97d8-224819336d92","internal",True
-"init.stock_location_h6","Stock","stock.stock_location_locations","init.85330a21-4e23-4285-8653-607899d365a2","internal",True
-"init.stock_location_h7","Stock","stock.stock_location_locations","init.3dfab1e4-fafa-4947-922f-b0073f85b243","internal",True
-"init.stock_location_h8","Stock","stock.stock_location_locations","init.7eb57995-eb10-4024-aded-95e2b91d3fcb","internal",True
-"init.stock_location_h9","Stock","stock.stock_location_locations","init.593a6583-0a0b-420b-b3e9-5a8da9a9bbf0","internal",True

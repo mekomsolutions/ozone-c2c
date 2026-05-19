@@ -1,0 +1,9 @@
+id,name,currency_id/id,city,partner_id/id,country_id/id,"parent_id/id"
+init.12b972a9-abcb-436f-a945-0578e67b4569,H2,base.HTG,Port-au-Prince,init.a3504410-7e1a-4ae2-b17a-e0e9d240891c,base.ht,base.main_company
+init.a242af5c-4a3b-43ca-a6ba-3cd2b7774d8a,H3,base.HTG,Port-au-Prince,init.d57219e3-5846-4296-a899-38f63adf729e,base.ht,base.main_company
+init.7fef5d23-2a82-4f30-a596-1da37e472d23,H4,base.HTG,Port-au-Prince,init.18cc402b-56e6-4e98-a9cc-b969911d22cb,base.ht,base.main_company
+init.4d7ef681-57ce-4cf1-97d8-224819336d92,H5,base.HTG,Port-au-Prince,init.37e0e58a-e874-4bb4-b91a-d62a3e4ee8d7,base.ht,base.main_company
+init.85330a21-4e23-4285-8653-607899d365a2,H6,base.HTG,Port-au-Prince,init.e7a99677-9bd2-4582-8aa6-b8806f6851a9,base.ht,base.main_company
+init.3dfab1e4-fafa-4947-922f-b0073f85b243,H7,base.HTG,Port-au-Prince,init.8563f290-54ef-4b29-8158-9763b64ddc50,base.ht,base.main_company
+init.7eb57995-eb10-4024-aded-95e2b91d3fcb,H8,base.HTG,Port-au-Prince,init.74f10472-4b32-4dbc-ae27-37070d81a47a,base.ht,base.main_company
+init.593a6583-0a0b-420b-b3e9-5a8da9a9bbf0,H9,base.HTG,Port-au-Prince,init.1a8c92d8-3b2d-42b6-9a01-09560e23c44b,base.ht,base.main_company
