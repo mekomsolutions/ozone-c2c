@@ -6,16 +6,6 @@
             "field_rules": {}
         },
         {
-            "model_name": "stock.location",
-            "folder": "stock_location",
-            "field_rules": {}
-        },
-        {
-            "model_name": "stock.warehouse",
-            "folder": "warehouse",
-            "field_rules": {}
-        },
-        {
             "model_name": "stock.picking.type",
             "folder": "stock_picking_type",
             "field_rules": {}
