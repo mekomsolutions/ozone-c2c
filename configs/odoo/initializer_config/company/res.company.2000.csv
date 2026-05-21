@@ -1,9 +1,9 @@
 id,name,currency_id/id,city,partner_id/id,country_id/id,"parent_id/id"
-init.dd73ebcb-ffab-469a-9b2a-9e7771634f35,H2,base.HTG,Cap-Haïtien,init.a3504410-7e1a-4ae2-b17a-e0e9d240891c,base.ht,base.main_company
-init.e1bf5983-a4f1-4688-8320-ca8de90c917c,H3,base.HTG,Cap-Haïtien,init.d57219e3-5846-4296-a899-38f63adf729e,base.ht,base.main_company
-init.e0321c99-05e6-452f-aa5f-1bf1697a4d47,H4,base.HTG,Cap-Haïtien,init.18cc402b-56e6-4e98-a9cc-b969911d22cb,base.ht,base.main_company
-init.291ce0d6-1b38-440a-8cfa-c902163e61fc,H5,base.HTG,Cap-Haïtien,init.37e0e58a-e874-4bb4-b91a-d62a3e4ee8d7,base.ht,base.main_company
-init.6f5372d8-798d-4d3a-aa7f-81193b623735,H6,base.HTG,Cap-Haïtien,init.e7a99677-9bd2-4582-8aa6-b8806f6851a9,base.ht,base.main_company
-init.2b364a93-8016-491f-81bc-52b05eadbb2f,H7,base.HTG,Cap-Haïtien,init.8563f290-54ef-4b29-8158-9763b64ddc50,base.ht,base.main_company
-init.795973f7-7523-466b-8e84-8b4472f6e74a,H8,base.HTG,Cap-Haïtien,init.74f10472-4b32-4dbc-ae27-37070d81a47a,base.ht,base.main_company
-init.51509e75-6caa-4a0f-9cff-49848a0666df,H9,base.HTG,Cap-Haïtien,init.1a8c92d8-3b2d-42b6-9a01-09560e23c44b,base.ht,base.main_company
+init.dd73ebcb-ffab-469a-9b2a-9e7771634f35,H2,base.HTG,Camp Coq,init.a3504410-7e1a-4ae2-b17a-e0e9d240891c,base.ht,base.main_company
+init.e1bf5983-a4f1-4688-8320-ca8de90c917c,H3,base.HTG,Bas La Coupe,init.d57219e3-5846-4296-a899-38f63adf729e,base.ht,base.main_company
+init.e0321c99-05e6-452f-aa5f-1bf1697a4d47,H4,base.HTG,Cité Chauvel,init.18cc402b-56e6-4e98-a9cc-b969911d22cb,base.ht,base.main_company
+init.291ce0d6-1b38-440a-8cfa-c902163e61fc,H5,base.HTG,Bas Limbé,init.37e0e58a-e874-4bb4-b91a-d62a3e4ee8d7,base.ht,base.main_company
+init.6f5372d8-798d-4d3a-aa7f-81193b623735,H6,base.HTG,Bayeux,init.e7a99677-9bd2-4582-8aa6-b8806f6851a9,base.ht,base.main_company
+init.2b364a93-8016-491f-81bc-52b05eadbb2f,H7,base.HTG,Savanette,init.8563f290-54ef-4b29-8158-9763b64ddc50,base.ht,base.main_company
+init.795973f7-7523-466b-8e84-8b4472f6e74a,H8,base.HTG,Roche Plate,init.74f10472-4b32-4dbc-ae27-37070d81a47a,base.ht,base.main_company
+init.51509e75-6caa-4a0f-9cff-49848a0666df,H9,base.HTG,Galiphète,init.1a8c92d8-3b2d-42b6-9a01-09560e23c44b,base.ht,base.main_company
