@@ -1,8 +1,8 @@
 services:
   openmrs:
     environment:
-      OMRS_CREATE_TABLES: "true"
-      OMRS_AUTO_UPDATE_DATABASE: "false"
+      OMRS_CREATE_TABLES: ${OMRS_CREATE_TABLES}
+      OMRS_AUTO_UPDATE_DATABASE: ${OMRS_AUTO_UPDATE_DATABASE}
     volumes:
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
