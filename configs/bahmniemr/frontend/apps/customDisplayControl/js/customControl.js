@@ -478,7 +478,7 @@ function billingStatusController($scope, $element, erpService, visitService, app
     "invoice_lines",
     "date",
     "state",
-    "date_due",
+    "invoice_date_due",
     "name",
     "payment_state"
   ]
@@ -583,7 +583,7 @@ function billingStatusController($scope, $element, erpService, visitService, app
         } else {
           tags.push(NOT_PAID);
         }
-        if (invoice.date_due != null && new Date(invoice.date_due).getDate() < new Date().getDate()) {
+        if (invoice.invoice_date_due != null && new Date(invoice.invoice_date_due).getDate() < new Date().getDate()) {
           tags.push(NOT_OVERDUE);
         } else {
           tags.push(OVERDUE);
