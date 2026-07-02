@@ -137,7 +137,7 @@
         <commonreportsVersion>1.6.0-SNAPSHOT</commonreportsVersion>
         <emrapiModuleVersion>1.36.0</emrapiModuleVersion>
         <episodesVersion>1.1.0</episodesVersion>
-        <openmrsERPVersion>2.0.0</openmrsERPVersion>
+        <openmrsERPVersion>2.2.0-SNAPSHOT</openmrsERPVersion>
         <eventModuleVersion>2.10.0</eventModuleVersion>
         <fhir2ModuleVersion>2.5.0</fhir2ModuleVersion>
         <fhir2addlextenstionVersion>1.0.0-SNAPSHOT</fhir2addlextenstionVersion>
