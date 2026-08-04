@@ -9,9 +9,6 @@
 	<!-- Concepts -->
 	<include file="concepts.xml" relativeToChangelogFile="true"/>
 
-	<!-- OpenELIS concepts -->
-	<include file="labs.xml"  relativeToChangelogFile="true"/>
-
 	<!-- Distro specific change logs -->
 	<include file="distroSpecificChangeLogs.xml"  relativeToChangelogFile="true"/>
 
