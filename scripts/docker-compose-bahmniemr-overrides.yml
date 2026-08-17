@@ -17,6 +17,7 @@ services:
       web:
 
   bahmni-web:
+    image: bahmni/bahmni-web:1.2.1
     labels:
       traefik.enable: "true"
       traefik.http.routers.bahmni.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && (PathPrefix(`/bahmni`) || PathPrefix(`/person-management`) || PathPrefix(`/cgi-bin`))"

@@ -170,7 +170,7 @@
         <uicommonsModuleVersion>2.25.0</uicommonsModuleVersion>
         <uiframeworkModuleVersion>3.24.0</uiframeworkModuleVersion>
         <uilibraryVersion>2.0.7</uilibraryVersion>
-        <webServicesRestVersion>2.44.0</webServicesRestVersion>
+        <webServicesRestVersion>3.5.0</webServicesRestVersion>
 
         <eipOdooOpenMRSVersion>2.3.0-SNAPSHOT</eipOdooOpenMRSVersion>
         <eipOdooOpenMRSArtifactId>eip-odoo-openmrs</eipOdooOpenMRSArtifactId>
