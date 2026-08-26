@@ -124,7 +124,6 @@
 
         <addressHierarchyVersion>2.21.0</addressHierarchyVersion>
         <appframeworkModuleVersion>2.17.0</appframeworkModuleVersion>
-        <appointmentsVersion>2.1.0</appointmentsVersion>
         <auditLogVersion>1.3.0</auditLogVersion>
         <bacteriologyVersion>1.3.0</bacteriologyVersion>
         <bahmniIEOmodVersion>1.4.0</bahmniIEOmodVersion>
@@ -153,14 +152,12 @@
         <metadataMappingVersion>1.6.0</metadataMappingVersion>
         <metadataSharingVersion>1.9.0</metadataSharingVersion>
         <openConceptLabVersion>2.3.0</openConceptLabVersion>
-        <bahmniCoreVersion>1.3.0</bahmniCoreVersion>
         <atomfeedModuleVersion>2.6.3</atomfeedModuleVersion>
         <operationTheaterVersion>1.8.0</operationTheaterVersion>
         <owaVersion>1.14.0</owaVersion>
         <pacsQueryVersion>1.4.0</pacsQueryVersion>
         <providerManagementVersion>2.14.0</providerManagementVersion>
         <patientsummaryVersion>2.2.0</patientsummaryVersion>
-        <bahmniCoreVersion>1.3.0</bahmniCoreVersion>
         <reportingVersion>1.26.0</reportingVersion>
         <reportingCompatibilityVersion>2.0.9</reportingCompatibilityVersion>
         <reportingRestVersion>1.14.0</reportingRestVersion>
@@ -190,12 +187,6 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>appframework-omod</artifactId>
             <version>${appframeworkModuleVersion}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bahmni.module</groupId>
-            <artifactId>appointments-omod</artifactId>
-            <version>${appointmentsVersion}</version>
         </dependency>
 
         <dependency>
