@@ -124,7 +124,7 @@
 
         <addressHierarchyVersion>2.21.0</addressHierarchyVersion>
         <appframeworkModuleVersion>2.17.0</appframeworkModuleVersion>
-        <appointmentsVersion>2.1.0-SNAPSHOT</appointmentsVersion>
+        <appointmentsVersion>2.1.0</appointmentsVersion>
         <auditLogVersion>1.3.0</auditLogVersion>
         <bacteriologyVersion>1.3.0</bacteriologyVersion>
         <bahmniIEOmodVersion>1.4.0</bahmniIEOmodVersion>
