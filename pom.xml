@@ -139,9 +139,9 @@
         <episodesVersion>1.1.0</episodesVersion>
         <openmrsERPVersion>2.2.0-SNAPSHOT</openmrsERPVersion>
         <eventModuleVersion>2.10.0</eventModuleVersion>
-        <fhir2ModuleVersion>2.5.0</fhir2ModuleVersion>
-        <fhir2addlextenstionVersion>1.0.0-SNAPSHOT</fhir2addlextenstionVersion>
-        <fhir2ExtensionModuleVersion>1.4.0</fhir2ExtensionModuleVersion>
+        <fhir2ModuleVersion>2.5.2-c2c-496</fhir2ModuleVersion>
+        <fhir2addlextenstionVersion>1.0.0-c2c-496-719ee4e</fhir2addlextenstionVersion>
+        <fhir2ExtensionModuleVersion>2.0.0-c2c-496</fhir2ExtensionModuleVersion>
         <cdssVersion>1.1.0</cdssVersion>
         <terminologyServicesVersion>1.1.0</terminologyServicesVersion>
         <htmlwidgetsVersion>1.11.0</htmlwidgetsVersion>
@@ -609,11 +609,6 @@
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}/openmrs_modules/</directory>
-                                    <excludes>
-                                        <exclude>fhir2-2.5.0.omod</exclude>
-                                        <exclude>fhir2Extension-1.4.0.omod</exclude>
-                                        <exclude>fhir2addlextension-1.0.0-SNAPSHOT.omod</exclude>
-                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
