@@ -8,5 +8,9 @@
       <property>conditionList.nonCodedUuid</property>
       <value>478181b3-bad8-4755-9ff8-0f9ded58cf11</value>
     </globalProperty>
+    <globalProperty>
+      <property>bahmni.diagnosisSetForNewDiagnosisConcepts</property>
+      <value>ef3c28ce-157f-4d54-aa94-dc5a40561707</value>
+    </globalProperty>
   </globalProperties>
 </config>
