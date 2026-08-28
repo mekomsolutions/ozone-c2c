@@ -126,6 +126,7 @@
         <appframeworkModuleVersion>2.17.0</appframeworkModuleVersion>
         <auditLogVersion>1.3.0</auditLogVersion>
         <bacteriologyVersion>1.3.0</bacteriologyVersion>
+        <appointmentsVersion>2.1.0</appointmentsVersion>
         <bahmniIEOmodVersion>1.4.0</bahmniIEOmodVersion>
         <bahmniCommonsVersion>1.2.0</bahmniCommonsVersion>
         <bahmniIpdVersion>1.1.1</bahmniIpdVersion>
@@ -193,6 +194,12 @@
             <groupId>org.bahmni.module</groupId>
             <artifactId>auditlog-omod</artifactId>
             <version>${auditLogVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bahmni.module</groupId>
+            <artifactId>appointments-omod</artifactId>
+            <version>${appointmentsVersion}</version>
         </dependency>
 
         <dependency>
