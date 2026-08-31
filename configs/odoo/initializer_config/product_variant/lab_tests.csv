@@ -67,7 +67,7 @@ init.5d687ffe-d0d8-48fe-a9c6-ed5d47cae953,Diplocoques a Gram negatif Intracellul
 init.bb645ded-3ebb-4117-9f81-51d1ce236f1f,Bacilles a Gram positif,init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
 init.d4db3add-39c5-4d42-bd11-3dd6a32d136a,Bacilles a Gram negatif,init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
 init.1d86445f-f0af-4612-80f6-f9cacf055844,Coccobacilles,init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
-init.784a3266-485d-49a3-851f-44hy93df4edb,Coloration de Gram (Frottis vaginal),init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
+init.eee65045-50b4-4d7d-8f7f-5a37711c8692,Coloration de Gram (Frottis vaginal),init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
 init.23b53f61-2845-4922-82a2-63e024afbcb2,Clue cell,init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
 init.784a3266-485d-49a3-851f-2a2c93df4edb,Goutte pendante,init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
 init.d00b8f8d-99f1-4d1b-806b-f2ca1353f7f8,Consistance des selles,init.categ_services_lab_test_orders,service,FALSE,Ordered quantities
