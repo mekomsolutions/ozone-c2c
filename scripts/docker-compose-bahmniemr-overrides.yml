@@ -9,6 +9,7 @@ services:
       traefik.http.routers.bahmni-openmrs.entrypoints: "websecure"
       traefik.http.services.bahmni-openmrs.loadbalancer.server.port: 8080
     volumes:
+      - "openmrs-data:/openmrs/data"
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
