@@ -72,7 +72,7 @@ services:
   patient-documents:
     labels:
       traefik.enable: "true"
-      traefik.http.routers.bahmni-patient-documents.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && (PathPrefix(`/document_images`) || PathPrefix(`/uploaded_results`) || PathPrefix(`/uploaded-files`))"
+      traefik.http.routers.bahmni-patient-documents.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && (PathPrefix(`/document_images`) || PathPrefix(`/uploaded_results`) || PathPrefix(`/uploaded-files`) || PathPrefix(`/openmrs/auth`))"
       traefik.http.routers.bahmni-patient-documents.entrypoints: "websecure"
       traefik.http.services.bahmni-patient-documents.loadbalancer.server.port: 80
     volumes:
