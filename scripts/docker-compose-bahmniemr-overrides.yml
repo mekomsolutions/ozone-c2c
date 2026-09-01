@@ -12,6 +12,13 @@ services:
       - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
+      - "${BAHMNI_LAB_RESULTS_OVERRIDE_PATH:-bahmni-lab-results}:/home/bahmni/uploaded_results"
+      - "${BAHMNI_UPLOADED_FILES_OVERRIDE_PATH:-bahmni-uploaded-files}:/home/bahmni/uploaded-files"
+      - "${BAHMNI_PATIENT_IMAGES_OVERRIDE_PATH:-bahmni-patient-images}:/home/bahmni/patient_images"
+      - "${BAHMNI_DOCUMENT_IMAGES_OVERRIDE_PATH:-bahmni-document-images}:/home/bahmni/document_images"
+      - "${BAHMNI_CONFIGURATION_CHECKSUMS_OVERRIDE_PATH:-configuration_checksums}:/openmrs/data/configuration_checksums"
+      - "${BAHMNI_CLINICAL_FORMS_OVERRIDE_PATH:-bahmni-clinical-forms}:/home/bahmni/clinical_forms"
+      - "${BAHMNI_SMS_TOKEN_OVERRIDE_PATH:-sms-token}:/openmrs/data/sms-token"
     networks:
       ozone:
       web:
@@ -44,12 +51,18 @@ services:
       ozone:
       web:
 
+  reportsdb:
+    volumes:
+      - '${REPORTS_DB_DATA_OVERRIDE_PATH:-reportsdbdata}:/var/lib/mysql'
+
   reports:
     labels:
       traefik.enable: "true"
       traefik.http.routers.bahmni-reports.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && PathPrefix(`/bahmnireports`)"
       traefik.http.routers.bahmni-reports.entrypoints: "websecure"
       traefik.http.services.bahmni-reports.loadbalancer.server.port: 8051
+    volumes:
+      - "${BAHMNI_REPORTS_OVERRIDE_PATH:-bahmni-queued-reports}:/home/bahmni/reports"
     networks:
       ozone:
       web:
@@ -60,6 +73,10 @@ services:
       traefik.http.routers.bahmni-patient-documents.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && (PathPrefix(`/document_images`) || PathPrefix(`/uploaded_results`) || PathPrefix(`/uploaded-files`))"
       traefik.http.routers.bahmni-patient-documents.entrypoints: "websecure"
       traefik.http.services.bahmni-patient-documents.loadbalancer.server.port: 80
+    volumes:
+      - "${BAHMNI_DOCUMENT_IMAGES_OVERRIDE_PATH:-bahmni-document-images}:/usr/share/nginx/html/document_images"
+      - "${BAHMNI_LAB_RESULTS_OVERRIDE_PATH:-bahmni-lab-results}:/usr/share/nginx/html/uploaded_results"
+      - "${BAHMNI_UPLOADED_FILES_OVERRIDE_PATH:-bahmni-uploaded-files}:/usr/share/nginx/html/uploaded-files"
     networks:
       ozone:
       web:
