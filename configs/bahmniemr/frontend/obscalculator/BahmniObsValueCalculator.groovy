@@ -131,22 +131,22 @@ public class BahmniObsValueCalculator implements ObsValueCalculator {
                 voidPreviousBMIObs(encounter.getObs());
             }
 
-            bmiDataObservation = bmiDataObservation ?: createObs("BMI Data", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
-            bmiStatusDataObservation = bmiStatusDataObservation ?: createObs("BMI Status Data", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
+            bmiDataObservation = bmiDataObservation ?: createObsByConceptUuid("2c5bbbbf-f34d-4590-b624-9f17b75b7f00", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
+            bmiStatusDataObservation = bmiStatusDataObservation ?: createObsByConceptUuid("80ef57a5-0d0c-48de-acdd-19e026c890b5", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
 
             def bmi = bmi(height, weight)
-            bmiObservation = bmiObservation ?: createObs("BMI", bmiDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
+            bmiObservation = bmiObservation ?: createObsByConceptUuid("c367d9ee-3f10-11e4-adec-0800271c1b75", bmiDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
             bmiObservation.setValue(bmi);
 
             def bmiStatus = bmiStatus(bmi, patientAgeInMonthsAsOfEncounter, patient.getGender());
-            bmiStatusObservation = bmiStatusObservation ?: createObs("BMI Status", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
+            bmiStatusObservation = bmiStatusObservation ?: createObsByConceptUuid("c368694c-3f10-11e4-adec-0800271c1b75", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
             bmiStatusObservation.setValue(bmiStatus);
 
             def bmiAbnormal = bmiAbnormal(bmiStatus);
-            bmiAbnormalObservation =  bmiAbnormalObservation ?: createObs("BMI Abnormal", bmiDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
+            bmiAbnormalObservation =  bmiAbnormalObservation ?: createObsByConceptUuid("c3843f1d-9835-47e8-842b-d51e57781585", bmiDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
             bmiAbnormalObservation.setValue(bmiAbnormal);
 
-            bmiStatusAbnormalObservation =  bmiStatusAbnormalObservation ?: createObs("BMI Status Abnormal", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
+            bmiStatusAbnormalObservation =  bmiStatusAbnormalObservation ?: createObsByConceptUuid("afd34a0d-ca7c-4f31-bd5a-4f1fa98100e1", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
             bmiStatusAbnormalObservation.setValue(bmiAbnormal);
 
             return
@@ -242,6 +242,15 @@ public class BahmniObsValueCalculator implements ObsValueCalculator {
         def concept = Context.getConceptService().getConceptByName(conceptName)
         BahmniObservation newObservation = new BahmniObservation()
         newObservation.setConcept(new EncounterTransaction.Concept(concept.getUuid(), conceptName))
+        newObservation.setObservationDateTime(obsDatetime);
+        parent == null ? encounterTransaction.addObservation(newObservation) : parent.addGroupMember(newObservation)
+        return newObservation
+    }
+
+    static BahmniObservation createObsByConceptUuid(String conceptUuid, BahmniObservation parent, BahmniEncounterTransaction encounterTransaction, Date obsDatetime) {
+        def concept = Context.getConceptService().getConceptByUuid(conceptUuid)
+        BahmniObservation newObservation = new BahmniObservation()
+        newObservation.setConcept(new EncounterTransaction.Concept(concept.getUuid(), conceptUuid))
         newObservation.setObservationDateTime(obsDatetime);
         parent == null ? encounterTransaction.addObservation(newObservation) : parent.addGroupMember(newObservation)
         return newObservation
