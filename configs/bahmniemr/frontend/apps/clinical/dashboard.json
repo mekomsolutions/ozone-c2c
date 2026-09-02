@@ -46,8 +46,8 @@
                     "conceptNames": [
                         "Taille",
                         "Poids",
-                        "BMI",
-                        "BMI STATUS",
+                        "IMC",
+                        "IMC STATUS",
                         "Périmètre bracchial"
                     ],
                     "showDetailsButton": true,
@@ -57,8 +57,8 @@
                     "conceptNames": [
                         "Taille",
                         "Poids",
-                        "BMI",
-                        "BMI STATUS",
+                        "IMC",
+                        "IMC STATUS",
                         "Périmètre bracchial"
                     ],
                     "numberOfVisits": 2,
