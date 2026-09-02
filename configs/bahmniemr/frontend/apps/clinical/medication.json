@@ -7,20 +7,20 @@
         "calculateDoseOnlyOnCurrentVisitValues": false
       },
       "inputOptionsConfig": {
-        "defaultDurationUnit": "Day(s)",
+        "defaultDurationUnit": "Jour(s)",
         "hideOrderSet" : false,
         "defaultInstructions": "As directed",
         "durationUnitsFactors": [
           {
-            "name": "Day(s)",
+            "name": "Jour(s)",
             "factor": 1
           },
           {
-            "name": "Week(s)",
+            "name": "Semaine(s)",
             "factor": 7
           },
           {
-            "name": "Month(s)",
+            "name": "Mois",
             "factor": 30
           }
         ],
@@ -28,17 +28,17 @@
           {
             "minFrequency": "1/7",
             "maxFrequency": 5,
-            "defaultDurationUnit": "Day(s)"
+            "defaultDurationUnit": "Jour(s)"
           },
           {
             "minFrequency": "1/30",
             "maxFrequency": "1/7",
-            "defaultDurationUnit": "Week(s)"
+            "defaultDurationUnit": "Semaine(s)"
           },
           {
             "minFrequency": null,
             "maxFrequency": "1/30",
-            "defaultDurationUnit": "Month(s)"
+            "defaultDurationUnit": "Mois"
           }
         ],
         "drugFormDefaults": {
