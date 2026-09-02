@@ -355,7 +355,7 @@
 	</changeSet>
 
 	<changeSet id="postBahmni-2026-09-02-12-00" author="siddharth">
-		<comment> Update Gram Stain (Vaginal Swab) UUID </comment>
+		<comment>Update Gram Stain (Vaginal Swab) UUID</comment>
 		<sql>UPDATE concept SET uuid = 'eee65045-50b4-4d7d-8f7f-5a37711c8692' where concept_id = (select DISTINCT CONCEPT_ID from concept_name where name='Gram Stain (Vaginal Swab)');</sql>
 	</changeSet>
 </databaseChangeLog>
