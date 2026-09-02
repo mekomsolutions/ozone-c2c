@@ -88,6 +88,8 @@ services:
       traefik.enable: "true"
       traefik.http.routers.bahmni-appointments.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && PathPrefix(`/appointments`)"
       traefik.http.routers.bahmni-appointments.entrypoints: "websecure"
+      traefik.http.routers.bahmni-appointments.middlewares: "appointments-security-headers"
+      traefik.http.middlewares.appointments-security-headers.headers.contentSecurityPolicy: "default-src 'self' 'unsafe-inline' 'unsafe-eval'; base-uri 'self'; font-src 'self' data: https://1.www.s81c.com; img-src 'self' data:; frame-ancestors 'self';"
       traefik.http.services.bahmni-appointments.loadbalancer.server.port: 80
     networks:
       ozone:
