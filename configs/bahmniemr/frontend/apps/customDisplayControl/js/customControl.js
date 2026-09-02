@@ -28,7 +28,7 @@ angular.module('bahmni.common.displaycontrol.custom')
                             vaccination.conceptUuid = x.conceptUuid;
                             vaccination.name = x.valueAsString;
                             vaccination.fullySpecifiedName = x.value.name;
-                        } else if (x.concept.name == 'Date de vaccination') {
+                        } else if (x.concept.name == 'Vaccination date') {
                             vaccination.vaccinationDate = x.value;
                         } else if (x.concept.name == 'Numéro de vaccinations') {
                             vaccination.vaccationSequenceValue = x.value;
