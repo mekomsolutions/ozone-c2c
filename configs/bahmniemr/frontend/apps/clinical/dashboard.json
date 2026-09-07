@@ -137,24 +137,24 @@
                 "displayOrder": 6,
                 "dashboardConfig": {
                     "conceptNames": [
-                        "Groupe tension artérielle",
-                        "Température",
-                        "Pouls",
-                        "Frequence respiratoire",
-                        "Saturation d'oxygène",
+                        "Signes Vitaux",
                         "Périmètre bracchial"
+                    ],
+                    "obsIgnoreList": [
+                        "Pain Scale",
+                        "Échelle de douleur"
                     ],
                     "showDetailsButton": true,
                     "numberOfVisits": 2
                 },
                 "expandedViewConfig": {
                     "conceptNames": [
-                        "Groupe tension artérielle",
-                        "Température",
-                        "Pouls",
-                        "Frequence respiratoire",
-                        "Saturation d'oxygène",
+                        "Signes Vitaux",
                         "Périmètre bracchial"
+                    ],
+                    "obsIgnoreList": [
+                        "Pain Scale",
+                        "Échelle de douleur"
                     ],
                     "numberOfVisits": 2,
                     "scope": "latest",
