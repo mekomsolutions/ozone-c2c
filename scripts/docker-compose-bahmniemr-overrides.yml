@@ -1,5 +1,6 @@
 services:
   openmrs:
+    image: bahmni/openmrs:1.2.0-1205
     environment:
       OMRS_CREATE_TABLES: ${OMRS_CREATE_TABLES:-true}
       OMRS_AUTO_UPDATE_DATABASE: ${OMRS_AUTO_UPDATE_DATABASE:-false}
@@ -26,6 +27,7 @@ services:
       web:
 
   bahmni-web:
+    image: bahmni/bahmni-web:2.0.0-968
     labels:
       traefik.enable: "true"
       traefik.http.routers.bahmni.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && (PathPrefix(`/bahmni`) || PathPrefix(`/person-management`) || PathPrefix(`/cgi-bin`))"
