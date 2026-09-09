@@ -86,6 +86,7 @@ services:
       web:
 
   appointments:
+    image: bahmni/appointments:1.2.0
     labels:
       traefik.enable: "true"
       traefik.http.routers.bahmni-appointments.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && PathPrefix(`/appointments`)"
