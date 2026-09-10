@@ -60,6 +60,12 @@
                     "phoneNumber",
                     "2ndPhoneNumber"
                 ]
+            },
+            "locationFilter": {
+                "label": "SEARCH_LOCATION_LABEL",
+                "allLocationsLabel": "SEARCH_ALL_LOCATIONS_LABEL",
+                "locationTag": "Login Location",
+                "identifierPrefixAttribute": "id_prefix"
             }
         },
         "patientSearchResults": {
