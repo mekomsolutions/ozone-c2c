@@ -43,74 +43,99 @@
         ],
         "drugFormDefaults": {
           "Ayurvedic": {
-            "doseUnits": "Teaspoon",
+            "doseUnits": "Cuillere(s) a cafe",
             "route": "Oral"
           },
           "Capsule": {
-            "doseUnits": "Capsule",
+            "doseUnits": "Gelule(s)",
             "route": "Oral"
           },
           "Cream": {
-            "route": "Topical"
+            "doseUnits": "Application(s)",
+            "route": "Topique"
           },
           "Drops": {
-            "doseUnits": "Drop",
-            "route": "Topical"
+            "doseUnits": "Goutte(s)",
+            "route": "Ophtalmique"
           },
           "Food Supplement": {
-            "doseUnits": "Unit",
+            "doseUnits": "Unite(s)",
             "route": "Oral"
           },
-          "Gel": {
-            "route": "Topical"
-          },
-          "Granule": {
-            "doseUnits": "Unit",
+          "Sublingual": {
+            "doseUnits": "Comprime(s)",
             "route": "Oral"
           },
-          "Inhaler": {
-            "doseUnits": "Puff",
+          "Inhalable": {
+            "doseUnits": "Bouffee(s)",
             "route": "Inhalation"
           },
-          "Injection": {
+          "Injectable": {
             "doseUnits": "mg",
-            "route": "Intravenous"
-          },
-          "Jelly": {
-            "route": "Topical"
-          },
-          "Liquid": {
-            "doseUnits": "ml",
-            "route": "Oral"
+            "route": "Intraveineuse"
           },
           "Lotion": {
-            "route": "Topical"
-          },
-          "Ointment": {
-            "route": "Topical"
-          },
-          "Pessary": {
-            "doseUnits": "Unit",
-            "route": "Per Vaginal"
+            "doseUnits": "Application(s)",
+            "route": "Topique"
           },
           "Powder": {
             "doseUnits": "mg",
-            "route": "Topical"
+            "route": "Topique"
           },
           "Solution": {
             "doseUnits": "ml",
-            "route": "Topical"
+            "route": "Intraveineuse"
           },
           "Spray": {
-            "doseUnits": "Puff",
-            "route": "Nasal"
+            "doseUnits": "Bouffee(s)",
+            "route": "Inhalation"
+          },
+          "Syrup/Suspension": {
+            "doseUnits": "ml",
+            "route": "Oral"
           },
           "Syrup": {
             "doseUnits": "ml",
             "route": "Oral"
           },
           "Tablet": {
-            "doseUnits": "Tablet",
+            "doseUnits": "Comprime(s)",
+            "route": "Oral"
+          },
+          "Unit": {
+            "doseUnits": "Unite(s)",
+            "route": "See comments"
+          },
+          "Oral Solution": {
+            "doseUnits": "ml",
+            "route": "Oral"
+          },
+          "Drinkable Suspension Gel": {
+            "doseUnits": "ml",
+            "route": "Oral"
+          },
+          "Oil": {
+            "doseUnits": "Application(s)",
+            "route": "Topique"
+          },
+          "Pessary(ies)": {
+            "doseUnits": "Ovule(s)",
+            "route": "Intravaginale"
+          },
+          "Pomade": {
+            "doseUnits": "Application(s)",
+            "route": "Topique"
+          },
+          "Paste": {
+            "doseUnits": "Paquet(s)",
+            "route": "Oral"
+          },
+          "Suppository": {
+            "doseUnits": "Unite(s)",
+            "route": "Rectal"
+          },
+          "Granules": {
+            "doseUnits": "Sachet(s)",
             "route": "Oral"
           }
         }
