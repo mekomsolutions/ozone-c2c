@@ -8,7 +8,7 @@
       },
       "inputOptionsConfig": {
         "defaultDurationUnit": "Jour(s)",
-        "hideOrderSet" : false,
+        "hideOrderSet": false,
         "defaultInstructions": "As directed",
         "durationUnitsFactors": [
           {
@@ -47,6 +47,10 @@
             "route": "Oral"
           },
           "Capsule": {
+            "doseUnits": "Capsule(s)",
+            "route": "Oral"
+          },
+          "Gelule": {
             "doseUnits": "Gelule(s)",
             "route": "Oral"
           },
@@ -55,6 +59,10 @@
             "route": "Topique"
           },
           "Drops": {
+            "doseUnits": "Drop(s)",
+            "route": "Ophtalmique"
+          },
+          "Gouttes": {
             "doseUnits": "Goutte(s)",
             "route": "Ophtalmique"
           },
@@ -78,19 +86,31 @@
             "doseUnits": "Application(s)",
             "route": "Topique"
           },
-          "Powder": {
+          "Poudre": {
             "doseUnits": "mg",
             "route": "Topique"
+          },
+          "Powder": {
+            "doseUnits": "mg",
+            "route": "Topical"
           },
           "Solution": {
             "doseUnits": "ml",
             "route": "Intraveineuse"
           },
-          "Spray": {
+          "Vaporisateur": {
             "doseUnits": "Bouffee(s)",
             "route": "Inhalation"
           },
+          "Spray": {
+            "doseUnits": "Puff(s)",
+            "route": "Inhalation"
+          },
           "Syrup/Suspension": {
+            "doseUnits": "ml",
+            "route": "Oral"
+          },
+          "Sirop/Suspuension": {
             "doseUnits": "ml",
             "route": "Oral"
           },
@@ -98,7 +118,15 @@
             "doseUnits": "ml",
             "route": "Oral"
           },
+          "Sirop": {
+            "doseUnits": "ml",
+            "route": "Oral"
+          },
           "Tablet": {
+            "doseUnits": "Tablet(s)",
+            "route": "Oral"
+          },
+          "Comprime": {
             "doseUnits": "Comprime(s)",
             "route": "Oral"
           },
@@ -110,28 +138,56 @@
             "doseUnits": "ml",
             "route": "Oral"
           },
+          "Solution orale": {
+            "doseUnits": "ml",
+            "route": "Oral"
+          },
           "Drinkable Suspension Gel": {
+            "doseUnits": "ml",
+            "route": "Oral"
+          },
+          "Suspension Buvable Gel": {
             "doseUnits": "ml",
             "route": "Oral"
           },
           "Oil": {
             "doseUnits": "Application(s)",
+            "route": "Topical"
+          },
+          "Huile": {
+            "doseUnits": "Application(s)",
             "route": "Topique"
           },
           "Pessary(ies)": {
+            "doseUnits": "Ovule(s)",
+            "route": "Intravaginal"
+          },
+          "Ovule(s)": {
             "doseUnits": "Ovule(s)",
             "route": "Intravaginale"
           },
           "Pomade": {
             "doseUnits": "Application(s)",
+            "route": "Pomade"
+          },
+          "Pommade": {
+            "doseUnits": "Application(s)",
             "route": "Topique"
           },
           "Paste": {
+            "doseUnits": "Packet(s)",
+            "route": "Oral"
+          },
+          "Pate": {
             "doseUnits": "Paquet(s)",
             "route": "Oral"
           },
           "Suppository": {
             "doseUnits": "Unite(s)",
+            "route": "Rectal"
+          },
+          "Suppositoire": {
+            "doseUnits": "Unit(s)",
             "route": "Rectal"
           },
           "Granules": {
