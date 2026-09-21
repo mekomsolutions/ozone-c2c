@@ -84,6 +84,19 @@ services:
       web:
 
   appointments:
+    volumes:
+      - type: bind
+        source: ${BAHMNI_CONFIG_OVERRIDE_PATH:?}/frontend/apps/appointments/overrides/index.html
+        target: /usr/local/apache2/htdocs/appointments/index.html
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${BAHMNI_CONFIG_OVERRIDE_PATH:?}/frontend/apps/appointments/overrides/tags-input-config.js
+        target: /usr/local/apache2/htdocs/appointments/tags-input-config.js
+        read_only: true
+        bind:
+          create_host_path: false
     labels:
       traefik.enable: "true"
       traefik.http.routers.bahmni-appointments.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && PathPrefix(`/appointments`)"
