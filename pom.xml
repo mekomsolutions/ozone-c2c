@@ -214,11 +214,12 @@
             <version>${bahmniIEOmodVersion}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.bahmni.module</groupId>
-            <artifactId>bahmni-commons-omod</artifactId>
-            <version>${bahmniCommonsVersion}</version>
-        </dependency>
+        <!-- Overriding bahmni-commons-omod with a patch that fixes patient search performance -->
+<!--        <dependency>-->
+<!--            <groupId>org.bahmni.module</groupId>-->
+<!--            <artifactId>bahmni-commons-omod</artifactId>-->
+<!--            <version>${bahmniCommonsVersion}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.bahmni.module</groupId>
