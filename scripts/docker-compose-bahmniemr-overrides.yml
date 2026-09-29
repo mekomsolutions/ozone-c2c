@@ -8,10 +8,56 @@ services:
       traefik.http.routers.bahmni-openmrs.rule: "Host(`${BAHMNI_EMR_HOSTNAME}`) && PathPrefix(`/openmrs`)"
       traefik.http.routers.bahmni-openmrs.entrypoints: "websecure"
       traefik.http.services.bahmni-openmrs.loadbalancer.server.port: 8080
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        test -s /openmrs/module-overrides/bahmni-commons-omod-1.2.0-c2c.1.omod
+        rm -f /openmrs/data/modules/bahmni-commons-*
+        cp /openmrs/module-overrides/bahmni-commons-omod-1.2.0-c2c.1.omod /openmrs/data/modules/bahmni-commons-omod-1.2.0-c2c.1.omod
+        
+        test -s /openmrs/module-overrides/bahmnicore-1.3.0.omod
+        rm -f /openmrs/data/modules/bahmnicore-*
+        cp /openmrs/module-overrides/bahmnicore-1.3.0.omod /openmrs/data/modules/bahmnicore-1.3.0.omod
+        
+        test -s /openmrs/module-overrides/commonreports-1.7.0-SNAPSHOT.omod
+        rm -f /openmrs/data/modules/commonreports-*
+        cp /openmrs/module-overrides/commonreports-1.7.0-SNAPSHOT.omod /openmrs/data/modules/commonreports-1.7.0-SNAPSHOT.omod
+        
+        test -s /openmrs/module-overrides/erp-2.2.0.omod
+        rm -f /openmrs/data/modules/erp-*
+        cp /openmrs/module-overrides/erp-2.2.0.omod /openmrs/data/modules/erp-2.2.0.omod
+        
+        test -s /openmrs/module-overrides/fhir2-2.5.2-c2c-496.omod
+        rm -f /openmrs/data/modules/fhir2-*
+        cp /openmrs/module-overrides/fhir2-2.5.2-c2c-496.omod /openmrs/data/modules/fhir2-2.5.2-c2c-496.omod
+        
+        test -s /openmrs/module-overrides/fhir2addlextension-1.0.0-c2c-496-719ee4e.omod
+        rm -f /openmrs/data/modules/fhir2addlextension-*
+        cp /openmrs/module-overrides/fhir2addlextension-1.0.0-c2c-496-719ee4e.omod /openmrs/data/modules/fhir2addlextension-1.0.0-c2c-496-719ee4e.omod
+        
+        test -s /openmrs/module-overrides/fhir2Extension-2.0.0-c2c-496.omod
+        rm -f /openmrs/data/modules/fhir2Extension-*
+        cp /openmrs/module-overrides/fhir2Extension-2.0.0-c2c-496.omod /openmrs/data/modules/fhir2Extension-2.0.0-c2c-496.omod
+        
+        test -s /openmrs/module-overrides/patientsummary-2.2.0.omod
+        rm -f /openmrs/data/modules/patientsummary-*
+        cp /openmrs/module-overrides/patientsummary-2.2.0.omod /openmrs/data/modules/patientsummary-2.2.0.omod
+        
+        rm -f /openmrs/data/modules/openelis-atomfeed-client-*
+        
+        exec ./bahmni_startup.sh
     volumes:
       - "openmrs-data:/openmrs/data"
       - "${BAHMNI_OPENMRS_LUCENE_PATH:-openmrs-data-lucene}:/openmrs/data/lucene"
-      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/:/openmrs/data/modules/"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/bahmni-commons-omod-1.2.0-c2c.1.omod:/openmrs/module-overrides/bahmni-commons-omod-1.2.0-c2c.1.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/bahmnicore-1.3.0.omod:/openmrs/module-overrides/bahmnicore-1.3.0.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/commonreports-1.7.0-SNAPSHOT.omod:/openmrs/module-overrides/commonreports-1.7.0-SNAPSHOT.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/erp-2.2.0.omod:/openmrs/module-overrides/erp-2.2.0.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/fhir2-2.5.2-c2c-496.omod:/openmrs/module-overrides/fhir2-2.5.2-c2c-496.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/fhir2addlextension-1.0.0-c2c-496-719ee4e.omod:/openmrs/module-overrides/fhir2addlextension-1.0.0-c2c-496-719ee4e.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/fhir2Extension-2.0.0-c2c-496.omod:/openmrs/module-overrides/fhir2Extension-2.0.0-c2c-496.omod:ro"
+      - "${BAHMNI_OPENMRS_MODULES_PATH:?}/patientsummary-2.2.0.omod:/openmrs/module-overrides/patientsummary-2.2.0.omod:ro"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties:/etc/properties/"
       - "${BAHMNI_CONFIG_OVERRIDE_PATH:?}/properties/erp.properties:/openmrs/data/erp.properties"
       - "${BAHMNI_LAB_RESULTS_OVERRIDE_PATH:-bahmni-lab-results}:/home/bahmni/uploaded_results"
