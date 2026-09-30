@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Appointment Scheduling</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        // Hold Angular startup until the local tags-input defaults are registered.
+        window.name = 'NG_DEFER_BOOTSTRAP!' + window.name;
+    </script>
+    <script defer src="appointment.js"></script>
+    <script defer src="tags-input-config.js"></script>
+</head>
+<body>
+<div class="bahmni-appointments">
+    <div ui-view="additional-header"></div>
+    <div ng-include src="'ui-helper-messages'"></div>
+    <div ui-view="mainContent"></div>
+</div>
+</body>
+</html>
