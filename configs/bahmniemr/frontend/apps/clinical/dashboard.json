@@ -196,6 +196,7 @@
             },
             "patientAppointments": {
                 "type": "custom",
+                "displayType": "Full-Page",
                 "displayOrder": 9,
                 "config": {
                     "title": "DASHBOARD_TITLE_APPOINTMENTS_KEY",
