@@ -270,15 +270,45 @@ angular.module('bahmni.common.displaycontrol.custom')
                     withCredentials: true
                 });
             };
+        var normalizeDateTime = function (dateTime) {
+            if (Array.isArray(dateTime)) {
+                // OpenMRS uses one-based months; Bahmni's date utilities use Moment arrays.
+                var normalizedDateTime = dateTime.slice();
+                normalizedDateTime[1] -= 1;
+                return normalizedDateTime;
+            }
+            return dateTime;
+        };
+        var formatAppointment = function (appointment) {
+            var startDateTime = normalizeDateTime(appointment.DASHBOARD_APPOINTMENTS_START_DATE_IN_UTC_KEY);
+            var endDateTime = normalizeDateTime(appointment.DASHBOARD_APPOINTMENTS_END_DATE_IN_UTC_KEY);
+            var dateUtil = Bahmni.Common.Util.DateUtil;
+            if (startDateTime != null) {
+                appointment.DASHBOARD_APPOINTMENTS_DATE_KEY = dateUtil.formatDateWithoutTimeToLocal(startDateTime);
+                appointment.DASHBOARD_APPOINTMENTS_START_DATE_KEY = dateUtil.formatDateWithoutTimeToLocal(startDateTime) + " " + dateUtil.formatTimeToLocal(startDateTime);
+            }
+            if (endDateTime != null) {
+                appointment.DASHBOARD_APPOINTMENTS_END_DATE_KEY = dateUtil.formatDateWithoutTimeToLocal(endDateTime) + " " + dateUtil.formatTimeToLocal(endDateTime);
+            }
+            if (startDateTime != null && endDateTime != null) {
+                appointment.DASHBOARD_APPOINTMENTS_SLOT_KEY = dateUtil.formatTimeToLocal(startDateTime) + " - " + dateUtil.formatTimeToLocal(endDateTime);
+            }
+
+            delete appointment.DASHBOARD_APPOINTMENTS_START_DATE_IN_UTC_KEY;
+            delete appointment.DASHBOARD_APPOINTMENTS_END_DATE_IN_UTC_KEY;
+
+            return appointment;
+        };
             $q.all([getUpcomingAppointments(), getPastAppointments()]).then(function (response) {
                 $scope.upcomingAppointments = response[0].data;
                 $scope.upcomingAppointmentsUUIDs = [];
                 for (var i=0; i<$scope.upcomingAppointments.length; i++) {
                     $scope.upcomingAppointmentsUUIDs[i] = $scope.upcomingAppointments[i].uuid;
                     delete $scope.upcomingAppointments[i].uuid;
+                formatAppointment($scope.upcomingAppointments[i]);
                 }
                 $scope.upcomingAppointmentsHeadings = _.keys($scope.upcomingAppointments[0]);
-                $scope.pastAppointments = response[1].data;
+                $scope.pastAppointments = response[1].data.map(formatAppointment);
                 $scope.pastAppointmentsHeadings = _.keys($scope.pastAppointments[0]);
             });
     
