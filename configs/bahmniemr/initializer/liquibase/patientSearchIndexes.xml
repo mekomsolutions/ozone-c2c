@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<!--
+		Covering indexes for the registration patient search (bahmni-commons PatientSearchQueryBuilder).
+		MariaDB drives that query from a full scan of person and joins these tables once per person before
+		applying the name filter, so each index holds every column its join reads (no row lookups).
+		Each changeset is skipped when the index already exists.
+	-->
+
+	<changeSet id="add-idx-pname-search" author="kipchubett">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				select count(*) from information_schema.statistics
+				where table_schema = database() and table_name = 'person_name' and index_name = 'idx_pname_search';
+			</sqlCheck>
+		</preConditions>
+		<comment>Patient search: covering index for the person_name join and name filter</comment>
+		<createIndex indexName="idx_pname_search" tableName="person_name">
+			<column name="person_id"/>
+			<column name="voided"/>
+			<column name="preferred"/>
+			<column name="given_name"/>
+			<column name="middle_name"/>
+			<column name="family_name"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="add-idx-pid-search" author="kipchubett">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				select count(*) from information_schema.statistics
+				where table_schema = database() and table_name = 'patient_identifier' and index_name = 'idx_pid_search';
+			</sqlCheck>
+		</preConditions>
+		<comment>Patient search: covering index for the primary/extra identifier and location prefix subqueries</comment>
+		<createIndex indexName="idx_pid_search" tableName="patient_identifier">
+			<column name="patient_id"/>
+			<column name="voided"/>
+			<column name="identifier_type"/>
+			<column name="identifier"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="add-idx-paddr-search" author="kipchubett">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				select count(*) from information_schema.statistics
+				where table_schema = database() and table_name = 'person_address' and index_name = 'idx_paddr_search';
+			</sqlCheck>
+		</preConditions>
+		<comment>Patient search: covering index for the person_address join (city_village result column)</comment>
+		<createIndex indexName="idx_paddr_search" tableName="person_address">
+			<column name="person_id"/>
+			<column name="voided"/>
+			<column name="city_village"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="add-idx-visit-search" author="kipchubett">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				select count(*) from information_schema.statistics
+				where table_schema = database() and table_name = 'visit' and index_name = 'idx_visit_search';
+			</sqlCheck>
+		</preConditions>
+		<comment>Patient search: covering index for the active visit join (patient, open visit, visit location, uuid)</comment>
+		<createIndex indexName="idx_visit_search" tableName="visit">
+			<column name="patient_id"/>
+			<column name="date_stopped"/>
+			<column name="location_id"/>
+			<column name="uuid"/>
+		</createIndex>
+	</changeSet>
+
+</databaseChangeLog>

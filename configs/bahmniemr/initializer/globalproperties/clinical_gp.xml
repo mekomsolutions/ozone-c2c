@@ -23,62 +23,79 @@
     </globalProperty>
     <globalProperty>
       <property>emrapi.sqlSearch.emergencyPatients</property>
-      <value>select distinct concat(pn.given_name," ", ifnull(pn.family_name,'')) as name,
-  pi.identifier as identifier,
-  concat("",p.uuid) as uuid,
-  concat("",v.uuid) as activeVisitUuid,
-  IF(va.value_reference = "Admitted", "true", "false") as hasBeenAdmitted
-  from
-    visit v join person_name pn on v.patient_id = pn.person_id and pn.voided = 0 and v.voided=0
-    join patient_identifier pi on v.patient_id = pi.patient_id and pi.voided=0
-    join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
-    join global_property gp on gp.property="bahmni.primaryIdentifierType" and gp.property_value=pit.uuid
-    join person p on p.person_id = v.patient_id  and p.voided=0
-    join encounter en on en.visit_id = v.visit_id and en.voided=0
-    join encounter_provider ep on ep.encounter_id = en.encounter_id  and ep.voided=0
-    join provider pr on ep.provider_id=pr.provider_id and pr.retired=0
-    join person per on pr.person_id=per.person_id and per.voided=0
-    join location l on l.uuid=${visit_location_uuid} and l.location_id = v.location_id
-    join obs ob on ob.encounter_id = en.encounter_id and ob.voided=0 and ob.value_coded = (
-      select concept_id from concept where uuid='2acd52d4-a0c5-45da-be77-0fe34bb3dd84'
-    )
-    join ( select obs_id from obs where voided=0 and obs_datetime in (select max(obs_datetime) from obs group by person_id, concept_id) ) ob2 on ob.obs_id = ob2.obs_id
+      <value>select
+    concat(pn.given_name, ' ', ifnull(pn.family_name, '')) as name,
+    pi.identifier as identifier,
+    concat("", p.uuid) as uuid,
+    concat("", v.uuid) as activeVisitUuid,
+    IF(va.value_reference = "Admitted", "true", "false") as hasBeenAdmitted
+  from visit v
+    join location l on l.location_id = v.location_id and l.uuid = ${visit_location_uuid}
+    join person p on p.person_id = v.patient_id and p.voided = 0
+    join person_name pn on pn.person_id = v.patient_id and pn.voided = 0 and pn.preferred = 1
+    join patient_identifier pi on pi.patient_id = v.patient_id and pi.voided = 0 and pi.preferred = 1
+    join patient_identifier_type pit on pit.patient_identifier_type_id = pi.identifier_type
+    join global_property gp on gp.property = "bahmni.primaryIdentifierType" and gp.property_value = pit.uuid
     left outer join visit_attribute va on va.visit_id = v.visit_id and va.voided = 0 and va.attribute_type_id = (
-				select visit_attribute_type_id from visit_attribute_type where name="Admission Status"
-			)
-
-    where
-    v.date_stopped is null
-    order by en.encounter_datetime desc</value>
+      select visit_attribute_type_id from visit_attribute_type where name="Admission Status"
+    )
+  where v.voided = 0
+    and v.date_stopped is null
+    and exists (
+      select 1
+      from obs ob
+        join encounter en on en.encounter_id = ob.encounter_id and en.voided = 0 and en.visit_id = v.visit_id
+      where ob.voided = 0
+        and ob.value_coded = (select concept_id from concept where uuid='2acd52d4-a0c5-45da-be77-0fe34bb3dd84')
+        and exists (
+          select 1 from encounter_provider ep
+            join provider pr on pr.provider_id = ep.provider_id and pr.retired = 0
+            join person per on per.person_id = pr.person_id and per.voided = 0
+          where ep.encounter_id = en.encounter_id and ep.voided = 0)
+        and not exists (
+          select 1 from obs later
+          where later.voided = 0 and later.person_id = ob.person_id
+            and later.concept_id = ob.concept_id and later.obs_datetime > ob.obs_datetime)
+    )
+  order by (select max(en2.encounter_datetime) from encounter en2 where en2.visit_id = v.visit_id and en2.voided = 0) desc</value>
     </globalProperty>
     <globalProperty>
       <property>emrapi.sqlSearch.priorityPatients</property>
-      <value>select distinct concat(pn.given_name," ", ifnull(pn.family_name,'')) as name,
-  pi.identifier as identifier,
-  concat("",p.uuid) as uuid,
-  concat("",v.uuid) as activeVisitUuid,
-  IF(va.value_reference = "Admitted", "true", "false") as hasBeenAdmitted
-  from
-    visit v join person_name pn on v.patient_id = pn.person_id and pn.voided = 0 and v.voided=0
-    join patient_identifier pi on v.patient_id = pi.patient_id and pi.voided=0
-    join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
-    join global_property gp on gp.property="bahmni.primaryIdentifierType" and gp.property_value=pit.uuid
-    join person p on p.person_id = v.patient_id  and p.voided=0
-    join encounter en on en.visit_id = v.visit_id and en.voided=0
-    join encounter_provider ep on ep.encounter_id = en.encounter_id  and ep.voided=0
-    join provider pr on ep.provider_id=pr.provider_id and pr.retired=0
-    join person per on pr.person_id=per.person_id and per.voided=0
-    join location l on l.uuid=${visit_location_uuid} and l.location_id = v.location_id
-    join obs ob on ob.encounter_id = en.encounter_id and ob.voided=0 and ob.value_coded = (
-      select concept_id from concept where uuid='63cf8bf7-7316-4b35-9bb6-2ef11384ca07'
-    )
-    join ( select obs_id from obs where voided=0 and obs_datetime in (select max(obs_datetime) from obs group by person_id, concept_id) ) ob2 on ob.obs_id = ob2.obs_id
+      <value>select
+    concat(pn.given_name, ' ', ifnull(pn.family_name, '')) as name,
+    pi.identifier as identifier,
+    concat("", p.uuid) as uuid,
+    concat("", v.uuid) as activeVisitUuid,
+    IF(va.value_reference = "Admitted", "true", "false") as hasBeenAdmitted
+  from visit v
+    join location l on l.location_id = v.location_id and l.uuid = ${visit_location_uuid}
+    join person p on p.person_id = v.patient_id and p.voided = 0
+    join person_name pn on pn.person_id = v.patient_id and pn.voided = 0 and pn.preferred = 1
+    join patient_identifier pi on pi.patient_id = v.patient_id and pi.voided = 0 and pi.preferred = 1
+    join patient_identifier_type pit on pit.patient_identifier_type_id = pi.identifier_type
+    join global_property gp on gp.property = "bahmni.primaryIdentifierType" and gp.property_value = pit.uuid
     left outer join visit_attribute va on va.visit_id = v.visit_id and va.voided = 0 and va.attribute_type_id = (
-				select visit_attribute_type_id from visit_attribute_type where name="Admission Status"
-			)
-    where
-    v.date_stopped is null
-    order by en.encounter_datetime desc</value>
+      select visit_attribute_type_id from visit_attribute_type where name="Admission Status"
+    )
+  where v.voided = 0
+    and v.date_stopped is null
+    and exists (
+      select 1
+      from obs ob
+        join encounter en on en.encounter_id = ob.encounter_id and en.voided = 0 and en.visit_id = v.visit_id
+      where ob.voided = 0
+        and ob.value_coded = (select concept_id from concept where uuid='63cf8bf7-7316-4b35-9bb6-2ef11384ca07')
+        and exists (
+          select 1 from encounter_provider ep
+            join provider pr on pr.provider_id = ep.provider_id and pr.retired = 0
+            join person per on per.person_id = pr.person_id and per.voided = 0
+          where ep.encounter_id = en.encounter_id and ep.voided = 0)
+        and not exists (
+          select 1 from obs later
+          where later.voided = 0 and later.person_id = ob.person_id
+            and later.concept_id = ob.concept_id and later.obs_datetime > ob.obs_datetime)
+    )
+  order by (select max(en2.encounter_datetime) from encounter en2 where en2.visit_id = v.visit_id and en2.voided = 0) desc</value>
     </globalProperty>
     <globalProperty>
       <property>emrapi.sqlSearch.prenatalPatients</property>
