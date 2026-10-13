@@ -296,6 +296,7 @@ angular.module('bahmni.common.displaycontrol.custom')
 
             delete appointment.DASHBOARD_APPOINTMENTS_START_DATE_IN_UTC_KEY;
             delete appointment.DASHBOARD_APPOINTMENTS_END_DATE_IN_UTC_KEY;
+            delete appointment.tele_health_video_link;
 
             return appointment;
         };
