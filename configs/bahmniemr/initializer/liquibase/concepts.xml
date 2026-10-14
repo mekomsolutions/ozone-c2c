@@ -358,4 +358,17 @@
 		<comment>Update Gram Stain (Vaginal Swab) UUID</comment>
 		<sql>UPDATE concept SET uuid = 'eee65045-50b4-4d7d-8f7f-5a37711c8692' where concept_id = (select DISTINCT CONCEPT_ID from concept_name where name='Gram Stain (Vaginal Swab)');</sql>
 	</changeSet>
+
+	<changeSet id="postbahmni-2026-10-06-lab-notes-uuid" author="siddharth">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(DISTINCT concept_id) FROM concept_name WHERE name = 'LAB_NOTES' AND voided = 0;
+			</sqlCheck>
+		</preConditions>
+		<comment>Set LAB_NOTES concept UUID</comment>
+		<sql>
+			UPDATE concept SET uuid = '33546207-45c6-4b4f-b954-91cb626337dc'
+			WHERE concept_id = (SELECT DISTINCT concept_id FROM concept_name WHERE name = 'LAB_NOTES' AND voided = 0);
+		</sql>
+	</changeSet>
 </databaseChangeLog>
