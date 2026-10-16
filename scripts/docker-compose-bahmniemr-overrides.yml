@@ -134,5 +134,12 @@ services:
       - --max-connections=${MYSQL_MAX_CONNECTIONS:-200}
       - --innodb-buffer-pool-size=${MYSQL_INNODB_BUFFER_POOL_SIZE:-2G}
 
+  senaite:
+    environment:
+      - RELSTORAGE_CACHE_LOCAL_MB=${RELSTORAGE_CACHE_LOCAL_MB:-10}
+
+  postgresql:
+    command: postgres -c wal_level=logical -c max_wal_senders=10 -c max_replication_slots=10 -c max_connections=200 -c max_slot_wal_keep_size=2GB -c shared_buffers=${POSTGRES_SHARED_BUFFERS:-128MB}
+
 volumes:
     openmrs-data-lucene:
