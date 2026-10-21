@@ -133,6 +133,9 @@ services:
       - --binlog-annotate-row-events=0
       - --max-connections=${MYSQL_MAX_CONNECTIONS:-200}
       - --innodb-buffer-pool-size=${MYSQL_INNODB_BUFFER_POOL_SIZE:-2G}
+      - --net-read-timeout=${MYSQL_NET_READ_TIMEOUT:-300}
+      - --net-write-timeout=${MYSQL_NET_WRITE_TIMEOUT:-300}
+      - --wait-timeout=${MYSQL_WAIT_TIMEOUT:-300}
 
   senaite:
     environment:
