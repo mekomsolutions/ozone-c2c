@@ -587,6 +587,7 @@
                                     <directory>${project.basedir}/scripts</directory>
                                     <includes>
                                         <include>docker-compose-bahmniemr-overrides.yml</include>
+                                        <include>docker-compose-senaite-override.yml</include>
                                     </includes>
                                 </resource>
                             </resources>

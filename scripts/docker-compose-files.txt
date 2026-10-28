@@ -2,6 +2,7 @@ docker-compose-common.yml
 docker-compose-keycloak.yml
 docker-compose-odoo.yml
 docker-compose-senaite.yml
+docker-compose-senaite-override.yml
 docker-compose-backup.yml
 docker-compose-bahmniemr.yml
 docker-compose-bahmniemr-senaite.yml
