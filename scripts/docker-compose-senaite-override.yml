@@ -1,5 +1,6 @@
 services:
   senaite:
+    image: mekomsolutions/senaite
     environment:
       - ZODB_CACHE_SIZE=${ZODB_CACHE_SIZE}
       - WSGI_THREADS=${WSGI_THREADS}
