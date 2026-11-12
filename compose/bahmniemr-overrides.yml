@@ -1,5 +1,21 @@
 services:
   openmrs:
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        # test -s /openmrs/module-overrides/fhir2-omod-2.5.2.jar
+        # rm -f /openmrs/data/modules/fhir2-*
+        # cp /openmrs/module-overrides/fhir2-omod-2.5.2.jar /openmrs/data/modules/fhir2-omod-2.5.2.omod
+        
+        # test -s /openmrs/module-overrides/fhir2Extension-omod-2.0.0-c2c-496.jar
+        # rm -f /openmrs/data/modules/fhir2Extension*
+        # cp /openmrs/module-overrides/fhir2Extension-omod-2.0.0-c2c-496.jar /openmrs/data/modules/fhir2Extension-omod-2.0.0-c2c-496.omod
+        
+        # test -s /openmrs/module-overrides/webservices.rest-omod-3.3.0.jar
+        # rm -f /openmrs/data/modules/webservices.rest*
+        # cp /openmrs/module-overrides/webservices.rest-omod-3.3.0.jar /openmrs/data/modules/webservices.rest-omod-3.3.0.omod
+        exec ./bahmni_startup.sh
     environment:
       OMRS_CREATE_TABLES: ${OMRS_CREATE_TABLES:-true}
       OMRS_AUTO_UPDATE_DATABASE: ${OMRS_AUTO_UPDATE_DATABASE:-false}

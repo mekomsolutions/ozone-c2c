@@ -1,0 +1,14 @@
+# vars.yml
+apps:
+  bahmniemr:
+    configs:
+      OPENMRS_DB_CREATE_TABLES: "true"
+      OPENMRS_DB_AUTO_UPDATE: "false"     # base default is true
+  odoo:
+    configs:
+      ODOO_ADDONS: sale_management,stock,account,purchase,mrp,odoo_initializer,mrp_product_expiry,product_expiry,l10n_generic_coa,sale_stock_margin
+integrations:
+  eip-odoo-openmrs:
+    configs:
+      ENABLE_ENCOUNTER_LOCATION_TO_COMPANY_MAPPING: "true"
+      EIP_DRUG_ORDER_TYPE_UUID: 16bb6bcf-2e81-4ba5-8583-ff4913201a72

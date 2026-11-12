@@ -1,0 +1,9 @@
+apps:
+  - bahmniemr
+  - odoo
+  - senaite
+
+modes:
+  proxy: true
+  sso: false
+

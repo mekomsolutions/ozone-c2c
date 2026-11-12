@@ -1,0 +1,3 @@
+apps:
+  bahmniemr:
+    compose: [compose/bahmniemr-overrides.yml]

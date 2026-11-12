@@ -5,13 +5,14 @@
     <parent>
         <groupId>com.ozonehis</groupId>
         <artifactId>maven-parent</artifactId>
-        <version>1.0.0-alpha.15</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <groupId>com.ozonehis</groupId>
     <artifactId>ozone-c2c</artifactId>
     <name>Ozone C2C Distribution</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <description>Ozone C2C distribution — child distro of Ozone</description>
+    <version>2.0.0-SNAPSHOT</version>
 
     <repositories>
         <repository>
@@ -579,15 +580,12 @@
                         </goals>
                         <configuration>
                             <outputDirectory>
-                                ${project.build.directory}/${project.artifactId}-${project.version}/run/docker/
+                                ${project.build.directory}/${project.artifactId}-${project.version}/distro/compose
                             </outputDirectory>
                             <overwrite>true</overwrite>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/scripts</directory>
-                                    <includes>
-                                        <include>docker-compose-bahmniemr-overrides.yml</include>
-                                    </includes>
+                                    <directory>${project.basedir}/compose</directory>
                                 </resource>
                             </resources>
                         </configuration>
