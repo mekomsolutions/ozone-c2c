@@ -164,3 +164,48 @@ Bahmni.Registration.AttributesConditions.rules = {
             }]);
         }]);
 })();
+
+// Birthdate and death date are calendar dates, but OpenMRS REST serialises them as midnight in the server's timezone
+// (e.g. 1990-05-12T00:00:00.000+0000). bahmni-web registration parses that full timestamp, so a browser behind
+// the server (Haiti against a UTC server) shows the day before, prints it on the registration card, and saves a dead
+// patient's death date one day earlier each time the record is saved. Patient update also sends the birthdate with the
+// browser's offset, so a browser ahead of the server (UTC+3) can store the day before what was entered.
+// The fix reads only the YYYY-MM-DD part and sends YYYY-MM-DD on update, as patient create already does.
+(function () {
+    var dateOnly = function (value) {
+        return (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) ? value.substr(0, 10) : value;
+    };
+
+    angular.module('bahmni.registration')
+        .config(['$provide', function ($provide) {
+            $provide.decorator('openmrsPatientMapper', ['$delegate', function ($delegate) {
+                var map = $delegate.map;
+                $delegate.map = function (openmrsPatientProfile) {
+                    var person = openmrsPatientProfile && openmrsPatientProfile.patient && openmrsPatientProfile.patient.person;
+                    if (!person) {
+                        return map.apply($delegate, arguments);
+                    }
+                    // Copy so the original response object, which the update request reuses for uuids, is left as received
+                    return map.call($delegate, angular.extend({}, openmrsPatientProfile, {
+                        patient: angular.extend({}, openmrsPatientProfile.patient, {
+                            person: angular.extend({}, person, {
+                                birthdate: dateOnly(person.birthdate),
+                                deathDate: dateOnly(person.deathDate)
+                            })
+                        })
+                    }));
+                };
+                return $delegate;
+            }]);
+        }]);
+
+    Bahmni.Registration.UpdatePatientRequestMapper.prototype.getBirthdate = function (birthdate, age) {
+        var mnt;
+        if (birthdate) {
+            mnt = moment(birthdate);
+        } else if (age !== undefined) {
+            mnt = moment(this.currentDate).subtract('days', age.days).subtract('months', age.months).subtract('years', age.years);
+        }
+        return mnt ? mnt.format('YYYY-MM-DD') : undefined;
+    };
+})();
