@@ -1,6 +1,6 @@
 services:
   senaite:
-    image: sidvaish97/senaite-test:v5.0
+    image: mekomsolutions/senaite
     environment:
       - SENAITE_SKIP_PDF=${SENAITE_SKIP_PDF}
       - ZODB_CACHE_SIZE=${ZODB_CACHE_SIZE}
