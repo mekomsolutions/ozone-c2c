@@ -2,6 +2,7 @@ services:
   senaite:
     image: mekomsolutions/senaite
     environment:
+      - SENAITE_SKIP_PDF=${SENAITE_SKIP_PDF}
       - ZODB_CACHE_SIZE=${ZODB_CACHE_SIZE}
       - WSGI_THREADS=${WSGI_THREADS}
       - ZEO_CLIENT_CACHE_SIZE=${ZEO_CLIENT_CACHE_SIZE}
