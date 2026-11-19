@@ -770,3 +770,30 @@ angular.module('bahmni.common.displaycontrol.custom')
       template: '<div><ng-include src="contentUrl" /></div>'
     }
   }])
+
+// Birthdate is a calendar date, but OpenMRS REST serialises it as midnight in the server's timezone
+// (e.g. 1990-05-12T00:00:00.000+0000). Bahmni.PatientMapper (bahmni-web 1.3.0) computes the age shown in the patient
+// header from that full timestamp, so a browser behind the server shows an age one day short. Hand it only the
+// YYYY-MM-DD part.
+(function () {
+    var OriginalPatientMapper = Bahmni.PatientMapper;
+    if (!OriginalPatientMapper || OriginalPatientMapper.c2cDateOnlyBirthdate) {
+        return;
+    }
+    var PatientMapper = function () {
+        OriginalPatientMapper.apply(this, arguments);
+        var mapBasic = this.mapBasic;
+        this.mapBasic = function (openmrsPatient) {
+            var person = openmrsPatient && openmrsPatient.person;
+            if (person && typeof person.birthdate === 'string') {
+                openmrsPatient = angular.extend({}, openmrsPatient, {
+                    person: angular.extend({}, person, {birthdate: person.birthdate.substr(0, 10)})
+                });
+            }
+            return mapBasic.call(this, openmrsPatient);
+        };
+    };
+    PatientMapper.prototype = OriginalPatientMapper.prototype;
+    PatientMapper.c2cDateOnlyBirthdate = true;
+    Bahmni.PatientMapper = PatientMapper;
+})();
