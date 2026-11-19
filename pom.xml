@@ -588,6 +588,7 @@
                                     <includes>
                                         <include>docker-compose-bahmniemr-overrides.yml</include>
                                         <include>docker-compose-senaite-override.yml</include>
+                                        <include>docker-compose-cve-2026-114938-override.yml</include>
                                     </includes>
                                 </resource>
                             </resources>
